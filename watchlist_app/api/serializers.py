@@ -1,8 +1,14 @@
 from rest_framework import serializers
 from ..models import Movie
+def name_length(value):
+    if len(value) < 2:
+            raise serializers.ValidationError("Name is too short")
+        
+    return value
+    
 class MovieSerializers(serializers.Serializer):
     id =serializers.IntegerField(read_only=True)
-    name=serializers.CharField()
+    name=serializers.CharField( validators=[name_length])
     description = serializers.CharField()
     active=serializers.BooleanField()
     def create(self, validated_data):
@@ -20,8 +26,8 @@ class MovieSerializers(serializers.Serializer):
         if data['name'] == data['description']:
             raise serializers.ValidationError("Title cannot be description")
         return data
-    def validate_name(self,value):
-        if len(value) < 2:
-            raise serializers.ValidationError("Name is too short")
+    # def validate_name(self,value):
+    #     if len(value) < 2:
+    #         raise serializers.ValidationError("Name is too short")
         
-        return value
+    #     return value
