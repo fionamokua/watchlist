@@ -3,7 +3,7 @@ from ..models import WatchList,StreamingPlartform
 
 
 class WatchListSerializers(serializers.ModelSerializer):
-    len_name= serializers.SerializerMethodField()
+    #len_name= serializers.SerializerMethodField()
     class Meta:
         model=WatchList
         #fields=['id','name','description','active']
