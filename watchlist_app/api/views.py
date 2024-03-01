@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 class StreamingPlartformAV(APIView):
     def get(self,request):
         platform=StreamingPlartform.objects.all()
-        serializer = StreamingPlatformSerializer(platform,many=True)
+        serializer = StreamingPlatformSerializer(platform,many=True,context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
     def post(self,request):
         serializer = StreamingPlatformSerializer(data=request.data)
